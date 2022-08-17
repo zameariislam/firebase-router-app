@@ -1,5 +1,5 @@
-import {useState } from "react"
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import {useEffect, useState } from "react"
+import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged,signOut } from "firebase/auth";
 import app from "../firebase.init";
 
  const auth=getAuth(app)
@@ -22,11 +22,29 @@ const googleProvider = new GoogleAuthProvider();
         })
 
 
-        console.log('signing in soon')
+     
     }
+    const handleSignOut=()=>{
+        signOut(auth)
+        .then(()=>{
+            setUser({})
+        })
+        .catch((error)=>{
+            console.log('an error occured')
+        })
+
+
+    }
+    useEffect(()=>{
+        onAuthStateChanged(auth,user=>{
+            setUser(user)
+        })
+
+    },[])
+   
 
     // return [user,setUser,signInWithGoogle]
-    return {user,setUser,signInWithGoogle}
+    return {user,setUser,signInWithGoogle,handleSignOut}
 
  }
  export default useFirebase;
