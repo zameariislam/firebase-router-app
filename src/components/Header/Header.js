@@ -8,6 +8,9 @@ const Header = () => {
         <div className='header'>
              <nav className='header'>
             <Link to='/'>Home</Link>
+            <Link to='/products'>Products</Link>
+            <Link to='/orders'>Orders</Link>
+            <Link to='/reviews'>Reviews</Link>
             <Link to='/login'>Log In</Link>
 
             
